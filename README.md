@@ -4,7 +4,7 @@
 
 [`sparkey`](https://github.com/spotify/sparkey) is a disk-based hash table, optimized for bulk writes and fast reads. It keeps two files on disk: a log file (e.g. "blargh.spl"), and an index file (e.g. "blargh.spi").
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/tiegz/sparkey-go)](https://goreportcard.com/report/github.com/tiegz/sparkey-go)
+[![Go Report Card](https://goreportcard.com/badge/github.com/pehrs/sparkey-go)](https://goreportcard.com/report/github.com/pehrs/sparkey-go)
 
 ## Setup
 
@@ -16,18 +16,18 @@ First install the `sparkey` library:
 
 ### Install manually
 
-`go get github.com/tiegz/sparkey-go`
+`go get github.com/pehrs/sparkey-go`
 
 ### Install with go dep
 
-`dep ensure -add github.com/tiegz/sparkey-go`
+`dep ensure -add github.com/pehrs/sparkey-go`
 
 ## Usage
 
 #### Importing it
 
 ``` go
-import "github.com/tiegz/sparkey-go"
+import "github.com/pehrs/sparkey-go"
 ```
 
 #### Creating the store

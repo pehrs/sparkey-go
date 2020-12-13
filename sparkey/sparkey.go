@@ -4,7 +4,7 @@ package sparkey
 // #include <stdlib.h>
 // #cgo CFLAGS: -I/usr/local/lib
 // #cgo LDFLAGS: -L/usr/local/lib -lsparkey
-// #include <./sparkey.h>
+// #include <sparkey/sparkey.h>
 import "C"
 import (
 	"fmt"
@@ -95,9 +95,9 @@ func (store *Sparkey) Put(key string, value string) {
 
 	C.sparkey_logwriter_put(
 		store.LogWriter,
-		C.ulonglong(len(key)),
+		C.ulong(len(key)),
 		cKey,
-		C.ulonglong(len(value)),
+		C.ulong(len(value)),
 		cValue)
 }
 
@@ -107,7 +107,7 @@ func (store *Sparkey) Delete(key string) {
 
 	C.sparkey_logwriter_delete(
 		store.LogWriter,
-		C.ulonglong((len(key))),
+		C.ulong((len(key))),
 		cKey)
 }
 
@@ -153,8 +153,8 @@ func (store *Sparkey) Get(k string) (v string, e error) {
 	defer C.sparkey_logiter_close(&li)
 	cKey := (*C.uchar)(unsafe.Pointer(C.CString(k)))
 	defer C.free(unsafe.Pointer(cKey))
-	var wanted_valuelen C.ulonglong
-	var actual_valuelen C.ulonglong
+	var wanted_valuelen C.ulong
+	var actual_valuelen C.ulong
 	var valuebuf *C.uchar
 	defer C.free(unsafe.Pointer(valuebuf))
 	var return_code C.sparkey_returncode
@@ -163,7 +163,7 @@ func (store *Sparkey) Get(k string) (v string, e error) {
 	C.sparkey_hash_get(
 		store.HashReader,
 		cKey,
-		C.ulonglong(len(k)),
+		C.ulong(len(k)),
 		li)
 
 	if C.sparkey_logiter_state(li) != ITERATOR_STATE_ACTIVE {
@@ -221,10 +221,10 @@ func (store *Sparkey) ForEachLog(fn func(k, v string)) error {
 func (store *Sparkey) forEach(t forEachType, li *C.sparkey_logiter, fn func(k, v string)) error {
 	var lis C.sparkey_iter_state = C.sparkey_logiter_state(li)
 
-	var wanted_keylen C.ulonglong
-	var actual_keylen C.ulonglong
-	var wanted_valuelen C.ulonglong
-	var actual_valuelen C.ulonglong
+	var wanted_keylen C.ulong
+	var actual_keylen C.ulong
+	var wanted_valuelen C.ulong
+	var actual_valuelen C.ulong
 	var keybuf *C.uchar
 	var valuebuf *C.uchar
 	var return_code C.sparkey_returncode

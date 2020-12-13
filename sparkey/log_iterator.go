@@ -4,7 +4,7 @@ package sparkey
 // #include <stdlib.h>
 // #cgo CFLAGS: -I/usr/local/lib
 // #cgo LDFLAGS: -L/usr/local/lib -lsparkey
-// #include <./sparkey.h>
+// #include <sparkey/sparkey.h>
 import "C"
 
 func NewLogIterator(lr *C.sparkey_logreader) *C.sparkey_logiter {
